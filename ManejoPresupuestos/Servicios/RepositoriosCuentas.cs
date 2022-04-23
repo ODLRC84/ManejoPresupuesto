@@ -6,8 +6,11 @@ namespace ManejoPresupuestos.Servicios
 {
     public interface IRepositorioCuentas
     {
+        Task Actualizar(CuentaCreacionViewModel cuenta);
+        Task Borrar(int id);
         Task<IEnumerable<Cuenta>> Buscar(int usuarioId);
         Task Crear(Cuenta cuenta);
+        Task<Cuenta> ObtenerPorId(int id, int usuarioId);
     }
     public class RepositoriosCuentas: IRepositorioCuentas
     {
@@ -30,11 +33,37 @@ namespace ManejoPresupuestos.Servicios
         public async Task<IEnumerable<Cuenta>> Buscar(int usuarioId)
         {
             using var connection = new SqlConnection(connectionString);
-            return await connection.QueryAsync<Cuenta>(@"SELECT Cuentas.Id, Cuentas.Nombre, Balance,  tc.Nombre as TipoCueta
+            return await connection.QueryAsync<Cuenta>(@"SELECT Cuentas.Id, Cuentas.Nombre, Balance,  tc.Nombre as TipoCuenta
                                                 FROM Cuentas 
                                                 INNER JOIN TiposCuentas tc ON tc.Id = Cuentas.TipoCuentaId
                                                 WHERE tc.UsuarioId = @UsuarioId
                                                 ORDER BY tc.Orden", new {usuarioId});
+        }
+
+        public async Task<Cuenta> ObtenerPorId(int id, int usuarioId)
+        {
+            using var connection = new SqlConnection(connectionString);
+            return await connection.QueryFirstOrDefaultAsync<Cuenta>(@"SELECT Cuentas.Id, Cuentas.Nombre, Balance, Descripcion,  Cuentas.TipoCuentaId
+                                                FROM Cuentas 
+                                                INNER JOIN TiposCuentas tc ON tc.Id = Cuentas.TipoCuentaId
+                                                WHERE tc.UsuarioId = @UsuarioId AND Cuentas.Id = @Id
+                                                ORDER BY tc.Orden", new { id, usuarioId });
+        }
+
+        public async Task Actualizar(CuentaCreacionViewModel cuenta)
+        {
+            using var connection = new SqlConnection(connectionString);
+
+            await connection.ExecuteAsync(@"UPDATE Cuentas SET Nombre = @Nombre, Balance = @Balance, Descripcion = @Descripcion, TipoCuentaId = @TipoCuentaId
+                                                WHERE Id=@Id; ", cuenta);
+
+        }
+
+        public async Task Borrar(int id)
+        {
+            using var connection = new SqlConnection(connectionString);
+
+            await connection.ExecuteAsync("DELETE Cuentas  WHERE Id=@Id", new{ id });
         }
     }
 }

@@ -57,3 +57,6 @@ C:\Users\Desarrollo\source\repos\Curso2\ManejoPresupuestos\ManejoPresupuestos\bi
 C:\Users\Desarrollo\source\repos\Curso2\ManejoPresupuestos\ManejoPresupuestos\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Desarrollo\source\repos\Curso2\ManejoPresupuestos\ManejoPresupuestos\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 C:\Users\Desarrollo\source\repos\Curso2\ManejoPresupuestos\ManejoPresupuestos\obj\Debug\net6.0\ManejoPresupuestos.csproj.CopyComplete
+C:\Users\Desarrollo\source\repos\Curso2\ManejoPresupuestos\ManejoPresupuestos\obj\Debug\net6.0\scopedcss\Views\Cuentas\Index.cshtml.rz.scp.css
+C:\Users\Desarrollo\source\repos\Curso2\ManejoPresupuestos\ManejoPresupuestos\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\Desarrollo\source\repos\Curso2\ManejoPresupuestos\ManejoPresupuestos\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
